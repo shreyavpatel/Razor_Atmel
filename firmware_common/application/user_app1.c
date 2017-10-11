@@ -143,10 +143,13 @@ static void UserApp1SM_Idle(void)
   /* Increment u32Counter every 1ms cycle */
   u32Counter++;
   
+  static u32 u32divider = 1;
+  
   /* Check and roll over */
-  if(u32Counter == COUNTER_LIMIT_MS)
+  if(u32Counter == COUNTER_LIMIT_MS/u32divider)
   {
     u32Counter = 0;
+    u32divider ++;
     
     if(bLightIsOn)
     {
