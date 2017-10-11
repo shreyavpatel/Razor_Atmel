@@ -137,19 +137,23 @@ State Machine Function Definitions
 /* Wait for ??? */
 static void UserApp1SM_Idle(void)
 {
-  static u32 u32Counter = 0;
+  static u32 u32Counter1 = 0;
+  static u32 u32Counter2 = 0;
+  
   static bool bLightIsOn = FALSE;
   
   /* Increment u32Counter every 1ms cycle */
-  u32Counter++;
+  u32Counter1++;
+  u32Counter2++;
   
   static u32 u32divider = 1;
   
+  
   /* Check and roll over */
-  if(u32Counter == COUNTER_LIMIT_MS/u32divider)
+  if(u32Counter1 == COUNTER_LIMIT_MS/u32divider)
   {
-    u32Counter = 0;
-    u32divider ++;
+    u32Counter1 = 0;
+    
     
     if(bLightIsOn)
     {
@@ -161,6 +165,13 @@ static void UserApp1SM_Idle(void)
     }
     bLightIsOn = !bLightIsOn;
   }
+  
+  if (u32Counter2 == COUNTER_LIMIT_MS)
+  {
+     u32divider *= 2;
+     u32Counter2 = 0;
+  }
+   
   
 } /* end UserApp1SM_Idle() */
     
