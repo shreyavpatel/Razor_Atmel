@@ -141,12 +141,13 @@ static void UserApp1SM_Idle(void)
   static u32 u32Counter2 = 0;
   
   static bool bLightIsOn = FALSE;
+  static bool bIncreasing = TRUE;   
   
   /* Increment u32Counter every 1ms cycle */
   u32Counter1++;
   u32Counter2++;
   
-  static u32 u32divider = 1;
+  static u32 u32divider = 128;
   
   
   /* Check and roll over */
@@ -168,8 +169,24 @@ static void UserApp1SM_Idle(void)
   
   if (u32Counter2 == COUNTER_LIMIT_MS)
   {
-     u32divider *= 2;
      u32Counter2 = 0;
+     
+     if (u32divider == 128)      //check if its blinking full speed
+     {
+        bIncreasing = FALSE;
+     }
+     else if (u32divider == 1)
+     {
+       bIncreasing = TRUE;
+     }
+     if (bIncreasing)
+     {
+       u32divider *= 2;
+     }
+     if (!bIncreasing)
+     {
+       u32divider /= 2;
+     }
   }
    
   
