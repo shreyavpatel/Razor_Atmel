@@ -87,29 +87,19 @@ Promises:
 */
 void UserApp1Initialize(void)
 {
- 
-  /* All discrete LEDs to off */
-  LedOff(WHITE);
-  LedOff(PURPLE);
-  LedOff(BLUE);
-  LedOff(CYAN);
-  LedOff(GREEN);
-  LedOff(YELLOW);
-  LedOff(ORANGE);
-  LedOff(RED);
-  
-  /* Backlight to white */  
-  LedOn(LCD_RED);
-  LedOn(LCD_GREEN);
-  LedOn(LCD_BLUE);
-  
-  
+  /* Set an LED to blink at 2Hz */
+    LedBlink(RED, LED_2HZ);
 
+    
+    LedBlink(WHITE, LED_0_5HZ);
+    LedBlink(PURPLE, LED_1HZ);
+    LedBlink(BLUE, LED_2HZ);
+    LedBlink(CYAN, LED_4HZ);
+    LedBlink(GREEN, LED_4HZ);
+    LedBlink(YELLOW, LED_2HZ);
+    LedBlink(ORANGE, LED_1HZ);
+    LedBlink(RED, LED_0_5HZ);
    
-    
-    
-    
-    
   
   
   /* If good initialization, set state to Idle */
@@ -160,63 +150,6 @@ State Machine Function Definitions
 /* Wait for ??? */
 static void UserApp1SM_Idle(void)
 {
-  
-  static u16 u16BlinkCount = 0;
-  static u8 u8Counter = 0;
-
-  u16BlinkCount++;
-  if(u16BlinkCount == 500)
-  {
-    u16BlinkCount = 0;
-    
-    /* Update the counter and roll at 16 */
-    u8Counter++;
-    if(u8Counter == 16)
-    {
-      u8Counter = 0;
-    }
-  }
-  
-  /* Parse the current count to set the LEDs.  
-      RED is bit 0, ORANGE is bit 1, 
-      YELLOW is bit 2, GREEN is bit 3. */
-    
-    if(u8Counter & 0x01)
-    {
-      LedOn(RED);
-    }
-    else
-    {
-      LedOff(RED);
-    }
-
-    if(u8Counter & 0x02)
-    {
-      LedOn(ORANGE);
-    }
-    else
-    {
-      LedOff(ORANGE);
-    }
-
-    if(u8Counter & 0x04)
-    {
-      LedOn(YELLOW);
-    }
-    else
-    {
-      LedOff(YELLOW);
-    }
-
-    if(u8Counter & 0x08)
-    {
-      LedOn(GREEN);
-    }
-    else
-    {
-      LedOff(GREEN);
-    }
-  
 
 } /* end UserApp1SM_Idle() */
     
