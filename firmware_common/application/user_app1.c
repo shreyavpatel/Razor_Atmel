@@ -87,22 +87,6 @@ Promises:
 */
 void UserApp1Initialize(void)
 {
-  /* Set an LED to blink at 2Hz */
-    LedBlink(RED, LED_2HZ);
-
-    
-    LedBlink(WHITE, LED_0_5HZ);
-    LedBlink(PURPLE, LED_1HZ);
-    LedBlink(BLUE, LED_2HZ);
-    LedBlink(CYAN, LED_4HZ);
-    LedBlink(GREEN, LED_4HZ);
-    LedBlink(YELLOW, LED_2HZ);
-    LedBlink(ORANGE, LED_1HZ);
-    LedBlink(RED, LED_0_5HZ);
-   
-    LedOn(LCD_RED);
-    LedOn(LCD_BLUE);
-    LedOff(LCD_GREEN);
   
   /* If good initialization, set state to Idle */
   if( 1 )
@@ -134,6 +118,35 @@ Promises:
 */
 void UserApp1RunActiveState(void)
 {
+  static u8 u8Counter =0;
+  static u8 u8inorout=0;
+  
+  
+  if (u8inorout=0)
+  {
+    u8Counter++;
+  }
+  if (u8inorout=1)
+  {
+    u8Counter--;
+  }
+  
+  LedPWM(CYAN, ((int)(u8Counter)*2.5));
+  
+  
+  if (u8Counter==40)
+  {
+    u8inorout=1; 
+  }
+  
+  if (u8Counter==0)
+  {
+    u8inorout=0;
+  }
+  
+  
+  
+  
   UserApp1_StateMachine();
 
 } /* end UserApp1RunActiveState */
